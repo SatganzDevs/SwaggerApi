@@ -1,15 +1,22 @@
 {
-    "version":2,
-    "builds":[
-        {
-            "src":"./server.js",
-            "use":"@now/node"
-        }
-    ],
-    "routes":[
-        {
-            "src":"/(.*)",
-            "dest":"./server.js"
-        }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js", // Gantilah dengan nama file utama proyek Anda
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js" // Gantilah dengan path ke file utama API Anda
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.js" // Gantilah dengan path ke file utama lainnya jika diperlukan
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
