@@ -2,18 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.js", // Gantilah dengan nama file utama proyek Anda
+      "src": "server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.js" // Gantilah dengan path ke file utama API Anda
+      "dest": "index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.js" // Gantilah dengan path ke file utama lainnya jika diperlukan
+      "dest": "server.js"
     }
   ],
   "env": {
