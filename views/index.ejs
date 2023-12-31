@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Satzz Api's</title>
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3.52.1/swagger-ui.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satzz Api's</title>
+<meta name="description" content="Sebuah Website RestAPi Untuk WhatsApp Bot, (gratis)/tanpa APIKEY">
+<meta name="author" content="SatganzDevs">
+<meta property="og:image" content="https://i.pinimg.com/474x/7a/e9/99/7ae999ec50fbf6aa10daff3d2364a93e.jpg">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3.52.1/swagger-ui.css">
 </head>
 <body>
-  <div id="swagger-ui"></div>
-  <script src="https://unpkg.com/swagger-ui-dist@3.52.1/swagger-ui-bundle.js"></script>
-  <script src="https://unpkg.com/swagger-ui-dist@3.52.1/swagger-ui-standalone-preset.js"></script>
-  <script>
-    window.onload = function() {
-      const ui = SwaggerUIBundle({
-        url: "views/swagger.json",
-        dom_id: '#swagger-ui',
-        presets: [SwaggerUIBundle.presets.apis],
-        layout: "BaseLayout"
-      });
-    }
-  </script>
+<div id="swagger-ui"></div>
+<script src="https://unpkg.com/swagger-ui-dist@3.52.1/swagger-ui-bundle.js"></script>
+<script src="https://unpkg.com/swagger-ui-dist@3.52.1/swagger-ui-standalone-preset.js"></script>
+<script>
+window.onload = function() {
+const ui = SwaggerUIBundle({
+url: "views/swagger.json",
+dom_id: '#swagger-ui',
+presets: [SwaggerUIBundle.presets.apis],
+layout: "BaseLayout"
+});
+}
+</script>
 </body>
 </html>
