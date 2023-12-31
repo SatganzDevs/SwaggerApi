@@ -1,13 +1,13 @@
 {
-  "name": "flamboyantknowndesigner",
+  "name": "api-satganzdevs",
   "version": "1.0.0",
-  "description": "Every new repl comes with a `.replit` and a `replit.nix` file that let you configure your repl to do just about anything in any language!",
-  "main": "server.js",
+  "description": "simple api with express.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js --watch"
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "SatganzDevs",
   "license": "ISC",
   "dependencies": {
     "@bochilteam/scraper": "^4.2.4",
