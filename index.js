@@ -10,14 +10,11 @@ const ffmpegPath = require('ffmpeg-static');
 const { spawn } = require('child_process');
 const pump = require('pump');
 
-const pickRandom = (arr) => {
-return arr[Math.floor(Math.random() * arr.length)]};
+
 
 const nomorRandom = (min, max) => {
 return Math.floor(Math.random() * (max - min + 1)) + min };
 const creator = 'satganzdevs'
-
-
 const getBuffer = async (url, options) => {
 try {
 options ? options : {}
@@ -25,8 +22,6 @@ const res = await axios({method: "get", url, headers: { 'DNT': 1, 'Upgrade-Insec
 return res.data
 } catch (err) { return err }
 }
-
-
 const pickRandom = (arr) => { return arr[Math.floor(Math.random() * arr.length)] };
 const app = express();
 const PORT = process.env.PORT || 3000;
