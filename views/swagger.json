@@ -201,7 +201,7 @@
     },
     "/api/gombal": {
       "get": {
-        "tags": ["text"],
+        "tags": ["tools"],
         "summary": "Get gombal quote",
         "responses": {
           "200": {
@@ -217,7 +217,7 @@
     },
     "/api/quotes/islami": {
       "get": {
-        "tags": ["text"],
+        "tags": ["tools"],
         "summary": "Get islamic quote",
         "responses": {
           "200": {
@@ -233,7 +233,7 @@
     },
     "/api/quotes/anime": {
       "get": {
-        "tags": ["text"],
+        "tags": ["tools"],
         "summary": "Get anime quote",
         "responses": {
           "200": {
@@ -249,7 +249,7 @@
     },
     "/api/quotes/bacot": {
       "get": {
-        "tags": ["text"],
+        "tags": ["tools"],
         "summary": "Get bacot quote",
         "responses": {
           "200": {
@@ -265,7 +265,7 @@
     },
     "/api/quotes/senja": {
       "get": {
-        "tags": ["text"],
+        "tags": ["tools"],
         "summary": "Get senja quote",
         "responses": {
           "200": {
@@ -281,7 +281,7 @@
     },
     "/api/quotes/dilan": {
       "get": {
-        "tags": ["text"],
+        "tags": ["tools"],
         "summary": "Get dilan quote",
         "responses": {
           "200": {
