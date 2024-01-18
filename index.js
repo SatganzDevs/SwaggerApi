@@ -207,7 +207,7 @@ res.status(500).json({ error: 'Internal server error' });
 }
 })
 
-app.get("/quotes/anime", async(req, res) => {
+app.get("/api/quotes/anime", async(req, res) => {
 var anu = await quotesAnime()
 result = anu[Math.floor(Math.random() * anu.length)];
 res.json({
