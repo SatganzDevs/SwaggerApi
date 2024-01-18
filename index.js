@@ -10,7 +10,12 @@ const ffmpegPath = require('ffmpeg-static');
 const { spawn } = require('child_process');
 const pump = require('pump');
 
+const pickRandom = (arr) => {
+return arr[Math.floor(Math.random() * arr.length)]};
 
+const nomorRandom = (min, max) => {
+return Math.floor(Math.random() * (max - min + 1)) + min };
+const creator = 'satganzdevs'
 
 
 const getBuffer = async (url, options) => {
@@ -195,7 +200,149 @@ res.status(500).json({ error: 'Internal server error' });
 })
 
 
+app.get("/api/quotes/islami", async (req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/SatganzDevs/DataApi/main/random/quotesislam.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
 
+app.get("/api/quotes/dilan", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/dilan.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
+
+app.get("/api/quotes/galau", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/galau.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
+
+app.get("/api/quotes/motivasi", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/motivasi.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
+
+app.get("/api/quotes/senja", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/senja.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
+
+app.get("/api/quotes/bacot", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/bacot.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
+
+app.get("/api/quotes/katailham", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/katailham.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
+
+app.get("/api/gombal", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/gombal.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
+
+app.get("/api/quotes/bucin", async(req, res) => {
+try {
+const response = await axios.get('https://raw.githubusercontent.com/BochilTeam/database/master/kata-kata/bucin.json');
+console.log(response.data)
+const randomQuote = await pickRandom(response.data);
+res.json({
+status: true,
+quote: randomQuote,
+author: 'ＳａｔｇａｎｚＤｅｖｓ'
+});
+} catch (error) {
+console.error(error);
+res.json({ status: false, message: 'An error occurred' });
+}
+})
 
 
 app.post('/api/enhance-image', async (req, res) => {
