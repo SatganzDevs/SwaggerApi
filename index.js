@@ -5,6 +5,7 @@ const fs = require('fs').promises;
 const crypto = require('crypto');
 const axios = require('axios');
 const path = require('path');
+const cheerio = require('cheerio')
 const ytdl = require('ytdl-core');
 const ffmpegPath = require('ffmpeg-static');
 const { spawn } = require('child_process');
@@ -30,7 +31,19 @@ const { TiktokDL } = require("@tobyg74/tiktok-api-dl")
 //const { enhanceImage } = require('./remini.js');
 const { scdl, pinterest, pindl } = require('./scrape.js');
 const satria = require('@bochilteam/scraper')
-
+function quotesAnime() {
+return new Promise((resolve, reject) => {
+const page = Math.floor(Math.random() * 184)
+axios.get('https://otakotaku.com/quote/feed/'+page).then(({ data }) => {
+const $ = cheerio.load(data)
+const hasil = []
+$('div.kotodama-list').each(function(l, h) {
+hasil.push({link: $(h).find('a').attr('href'), gambar: $(h).find('img').attr('data-src'), karakter: $(h).find('div.char-name').text().trim(), anime: $(h).find('div.anime-title').text().trim(), episode: $(h).find('div.meta').text(), up_at: $(h).find('small.meta').text(), quotes: $(h).find('div.quote').text().trim()})
+})
+resolve(hasil)
+}).catch(reject)
+})
+}
 
 
 
@@ -194,7 +207,15 @@ res.status(500).json({ error: 'Internal server error' });
 }
 })
 
-
+app.get("/quotes/anime", async(req, res) => {
+var anu = await quotesAnime()
+result = anu[Math.floor(Math.random() * anu.length)];
+res.json({
+status: 200,
+creator: 'ＳａｔｇａｎｚＤｅｖｓ',
+result: result
+})
+})
 app.get("/api/quotes/islami", async (req, res) => {
 try {
 const response = await axios.get('https://raw.githubusercontent.com/SatganzDevs/DataApi/main/random/quotesislam.json');
