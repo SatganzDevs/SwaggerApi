@@ -199,6 +199,102 @@
         }
       }
     },
+    "/api/gombal": {
+      "get": {
+        "tags": ["text"],
+        "summary": "Get gombal quote",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"key\": \"value\"\n}\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quotes/islami": {
+      "get": {
+        "tags": ["text"],
+        "summary": "Get islamic quote",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"key\": \"value\"\n}\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quotes/anime": {
+      "get": {
+        "tags": ["text"],
+        "summary": "Get anime quote",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"key\": \"value\"\n}\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quotes/bacot": {
+      "get": {
+        "tags": ["text"],
+        "summary": "Get bacot quote",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"key\": \"value\"\n}\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quotes/senja": {
+      "get": {
+        "tags": ["text"],
+        "summary": "Get senja quote",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"key\": \"value\"\n}\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/quotes/dilan": {
+      "get": {
+        "tags": ["text"],
+        "summary": "Get dilan quote",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"key\": \"value\"\n}\n"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/enhance-image": {
       "post": {
         "tags": ["tools"],
