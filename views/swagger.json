@@ -125,6 +125,35 @@
         }
       }
     },
+    "/api/pinterestdl": {
+      "get": {
+        "tags": ["downloader"],
+        "summary": "Download Pinterest video",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Pinterest video URL",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "{\n  \"key\": \"value\"\n}\n"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/pinterest": {
       "get": {
         "tags": ["tools"],
@@ -182,157 +211,10 @@
           }
         }
       }
-    },
-    "/api/sound": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get random sound",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "audio/mpeg": {
-                "example": "<!-- Example image content -->\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/gombal": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get gombal quote",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/quotes/islami": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get islamic quote",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/quotes/anime": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get anime quote",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/quotes/bacot": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get bacot quote",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/quotes/senja": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get senja quote",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/quotes/dilan": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get dilan quote",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/enhance-image": {
-      "post": {
-        "tags": ["tools"],
-        "summary": "Enhance image",
-        "requestBody": {
-          "description": "Image data in base64 format",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/api_enhanceimage_body"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "image/jpeg": {
-                "example": "<!-- Example enhanced image content -->\n"
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
     "schemas": {
-      "api_enhanceimage_body": {
-        "type": "object",
-        "properties": {
-          "image": {
-            "type": "string"
-          }
-        }
-      }
     }
   }
 }
