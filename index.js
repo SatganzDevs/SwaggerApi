@@ -71,13 +71,22 @@ res.status(500).json({ error: 'Internal server error' });
 })
 app.get('/api/lirik', async (req, res) => {
 try {
-const lyrics = require('lyric-api');
+const Buscar = require("lyria-npm")
 const { judul } = req.query;
 if (!judul) {
 return res.status(400).json({ error: 'Judul musik tidak ditemukan' });
 }
-let ss = await lyrics.fetch(judul, 1)
-res.json(ss);
+let ss = await Buscar(judul, 1)
+let bro = {
+  title: ss.titulo,
+  artist: ss.artista,
+  album: ss.albulm,
+  release: ss.fecha,
+  genre: ss.Generos,
+  listen: ss.Escuchar,
+  lyrics: ss.letra
+}
+res.json(bro);
 } catch (error) {
 console.log('[lyric-api]:', error.message, error.stack)
 }
