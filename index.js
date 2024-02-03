@@ -28,27 +28,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const { snapsave } = require('./snapsave.js');
 const { TiktokDL } = require("@tobyg74/tiktok-api-dl")
-//const { enhanceImage } = require('./remini.js');
 const { scdl, pinterest, pindl } = require('./scrape.js');
-const satria = require('@bochilteam/scraper')
-function quotesAnime() {
-return new Promise((resolve, reject) => {
-const page = Math.floor(Math.random() * 184)
-axios.get('https://otakotaku.com/quote/feed/'+page).then(({ data }) => {
-const $ = cheerio.load(data)
-const hasil = []
-$('div.kotodama-list').each(function(l, h) {
-hasil.push({link: $(h).find('a').attr('href'), gambar: $(h).find('img').attr('data-src'), karakter: $(h).find('div.char-name').text().trim(), anime: $(h).find('div.anime-title').text().trim(), episode: $(h).find('div.meta').text(), up_at: $(h).find('small.meta').text(), quotes: $(h).find('div.quote').text().trim()})
-})
-resolve(hasil)
-}).catch(reject)
-})
-}
+
+
 
 
 
 app.use(cors());
-app.use(express.json({ limit: '10mb' })); // Increase the limit based on your image size
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/views', express.static('views'));
@@ -63,24 +49,7 @@ const reff = path.join(__dirname, 'SatganzDevs-Sapi-1.0.0-oas3-resolved.json')
 
 
 
-
-
-
-
-
-
-app.get('/api/sound', async (req, res) => {
-let result = await axios.get('https://storages.satganzdevs.repl.co/api/random-sound')
-let hasil = result.data.url
-res.setHeader('content-type', 'audio/mpeg');
-res.end(await getBuffer(hasil))
-})
-
-
-
-
-
-
+/// STARTS OF API CODE \\\
 app.get('/api/pinterest', async (req, res) => {
 const { query } = req.query;
 if (!query) {
@@ -89,30 +58,36 @@ return res.status(400).json({ error: 'Query parameter is required' });
 const result = await pinterest(query);
 res.json(result);
 })
-
-
-
-
-
+app.get('/api/pinterestdl', async (req, res) => {
+try {
+const { url } = req.query;
+if (!url) { return res.status(400).json({ error: 'Missing URL parameter' }) }
+const results = await pindl(url);
+res.json(results)
+} catch (error) {
+console.error(error);
+res.status(500).json({ error: 'Internal server error' });
+}
+})
 app.get('/api/lirik', async (req, res) => {
+try {
+const lyrics = require('lyric-api');
 const { judul } = req.query;
 if (!judul) {
 return res.status(400).json({ error: 'Judul musik tidak ditemukan' });
 }
-const result = await satria.lyrics(judul)
-res.json(result);
+let ss = await lyrics.fetch(judul, 1)
+res.json(ss);
+} catch (error) {
+console.log('[lyric-api]:', error.message, error.stack)
+}
 })
-
-
-
-
-
 app.get('/api/ytv', async (req, res) => {
 try {
 const { url } = req.query;
 if (!url) { return res.status(400).json({ error: 'Missing URL parameter' }) }
 if (!ytdl.validateURL(url)) { return res.status(400).json({ error: 'Invalid YouTube URL' }) }
-const videoStream = ytdl(url, { filter: format => format.container === 'mp4' });
+const videoStream = await ytdl(url);
 res.setHeader('content-type', 'video/mp4');
 videoStream.pipe(res);
 } catch (error) {
@@ -120,37 +95,6 @@ console.error(error);
 res.status(500).json({ error: 'Internal server error' });
 }
 });
-
-
-
-
-
-app.get('/api/thumb', async (req, res) => {
-try {
-const query = ["tsunade icon", "tsunade waifu icon", "tsunade anime icon", "tsunade girl icon"];
-const result = await pinterest('kanna kamui icon fanart&rs=guide&source_module_id=OBkanna_kamui_icon8034f28a-ee45-4a1c-a0cf-bf88b55429d2&journey_depth=1&add_refine=Kamui icon%7Cguide%7Cword%7C2');
-if (!result || result.length === 0) {
-res.status(404).send("No results found");
-return;
-}
-const randomImageUrl = pickRandom(result);
-if (!randomImageUrl) {
-res.status(500).send("Internal Server Error");
-return;
-}
-const imageResponse = await axios.get(randomImageUrl, { responseType: 'arraybuffer' });
-res.writeHead(200, { 'Content-Type': 'image/jpeg' }); 
-res.end(imageResponse.data, 'binary');
-} catch (error) {
-console.error(error);
-res.status(500).send("Internal Server Error");
-}
-});
-
-
-
-
-
 app.get('/api/yta', async (req, res) => {
 try {
 const { url } = req.query;
@@ -160,7 +104,7 @@ return res.status(400).json({ error: 'Missing URL parameter' });
 if (!ytdl.validateURL(url)) {
 return res.status(400).json({ error: 'Invalid YouTube URL' });
 }   
-const audioStream = ytdl(url, { quality: 'highestaudio' });
+const audioStream = await ytdl(url,  { filter: "audioonly" });
 res.setHeader('content-type', 'audio/mpeg');
 audioStream.pipe(res);
 } catch (error) {
@@ -168,13 +112,6 @@ console.error(error);
 res.status(500).json({ error: 'Internal server error' });
 }
 });
-
-
-
-
-
-
-
 app.get('/api/snapsave', async (req, res) => {
 try {
 const { url } = req.query;
@@ -188,11 +125,6 @@ console.log(error);
 res.status(500).json({ error: 'Internal server error' });
 }
 })
-
-
-
-
-
 app.get('/api/tiktok', async (req, res) => {
 try {
 const { url } = req.query;
@@ -207,237 +139,13 @@ res.status(500).json({ error: 'Internal server error' });
 }
 })
 
-app.get("/api/quotes/anime", async(req, res) => {
-var anu = await quotesAnime()
-result = anu[Math.floor(Math.random() * anu.length)];
-res.json({
-status: 200,
-creator: 'ＳａｔｇａｎｚＤｅｖｓ',
-result: result
-})
-})
-app.get("/api/quotes/islami", async (req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/SatganzDevs/DataApi/main/random/quotesislam.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/quotes/dilan", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/dilan.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/quotes/galau", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/galau.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/quotes/motivasi", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/motivasi.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/quotes/senja", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/senja.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/quotes/bacot", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/bacot.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/quotes/katailham", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/katailham.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/gombal", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/Abuzzpoet/Databasee/main/Random/gombal.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
-
-app.get("/api/quotes/bucin", async(req, res) => {
-try {
-const response = await axios.get('https://raw.githubusercontent.com/BochilTeam/database/master/kata-kata/bucin.json');
-console.log(response.data)
-const randomQuote = await pickRandom(response.data);
-res.json({
-status: true,
-quote: randomQuote,
-author: 'ＳａｔｇａｎｚＤｅｖｓ'
-});
-} catch (error) {
-console.error(error);
-res.json({ status: false, message: 'An error occurred' });
-}
-})
 
 
-app.post('/api/enhance-image', async (req, res) => {
-try {
-const imageData = req.body.image;
-const imageBuffer = Buffer.from(imageData, 'base64');
-const tempFilePath = 'temp_image.jpeg';
-await fs.writeFile(tempFilePath, imageBuffer);
-await enhanceImage(tempFilePath, "OHKItQuVy1N4c9B0HOOeWlUD8E2-d3VW4sBnQI2AX33Zbsbt");
-const enhancedImageContent = await fs.readFile('output_image.jpeg');
-await fs.unlink(tempFilePath);
-await fs.unlink('output_image.jpeg');
-res.send(enhancedImageContent);
-} catch (error) {
-const imageData = req.body.image;
-const imageBuffer = Buffer.from(imageData, 'base64');
-const tempFilePath = 'temp_image.jpeg';
-await fs.writeFile(tempFilePath, imageBuffer);
-await enhanceImage(tempFilePath, "y03sv_sa6ww7qqrwelmhFbke3-eQds9SA3wqAJUVEJbMlLQR");
-const enhancedImageContent = await fs.readFile('output_image.jpeg');
-await fs.unlink(tempFilePath);
-await fs.unlink('output_image.jpeg');
-res.send(enhancedImageContent);
-}
-});
-
-
-
-
-
-async function enhanceImage(imagePath, api) {
-const content = await fs.readFile(imagePath);
-const md5Hash = crypto.createHash('md5').update(content).digest('base64');
-const client = axios.create({
-baseURL: 'https://developer.remini.ai/api',
-headers: { Authorization: `Bearer ${api}` },
-timeout: 60000,
-});
-console.log('Submitting image ...');
-const submitTaskResponse = await client.post('/tasks', {
-tools: [
-{ type: 'face_enhance', mode: 'beautify' },
-{ type: 'background_enhance', mode: 'base' },
-
-],
-image_md5: md5Hash,
-image_content_type: 'image/jpeg',
-output_content_type: 'image/jpeg',
-});
-const taskID = submitTaskResponse.data.task_id;
-const uploadURL = submitTaskResponse.data.upload_url;
-const uploadHeaders = submitTaskResponse.data.upload_headers;
-console.log('Uploading image to Google Cloud Storage ...');
-await axios.put(uploadURL, content, { headers: uploadHeaders });
-console.log(`Processing task: ${taskID} ...`);
-await client.post(`/tasks/${taskID}/process`);
-console.log(`Polling result for task: ${taskID} ...`);
-for (let i = 0; i < 50; i++) {
-const getTaskResponse = await client.get(`/tasks/${taskID}`);
-if (getTaskResponse.data.status === 'completed') {
-console.log('Processing completed.');
-console.log('Output url: ' + getTaskResponse.data.result.output_url);
-await fs.writeFile('output_image.jpeg', getTaskResponse.data.result.output_url);
-break;
-} else {
-if (getTaskResponse.data.status !== 'processing') {
-console.error('Found illegal status: ' + getTaskResponse.data.status);
-process.exit(1);
-}
-console.log('Processing, sleeping 2 seconds ...');
-await new Promise((resolve) => setTimeout(resolve, 2000));
-}
-}
-}
 
 
 
 
 
 app.listen(PORT, () => {
-console.log(`Server is running on port ${PORT}`);
+console.log(`「 Connected 」 Server is running on port ${PORT}`);
 });
