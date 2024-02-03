@@ -1,220 +1,219 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Satzz API",
-    "description": "API for WhatsApp Bot",
-    "version": "1.0.0-oas3",
-    "contact": {
-      "email": "satganzdevs@gmail.com"
-    }
-  },
-  "paths": {
-    "/api/yta": {
-      "get": {
-        "tags": ["downloader"],
-        "summary": "Download YouTube audio",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "description": "YouTube video URL",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "audio/mpeg": {
-                "example": "<!-- Example audio content -->\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ytv": {
-      "get": {
-        "tags": ["downloader"],
-        "summary": "Download YouTube video",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "description": "YouTube video URL",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "video/mp4": {
-                "example": "<!-- Example video content -->\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/snapsave": {
-      "get": {
-        "tags": ["downloader"],
-        "summary": "Download FB/IG video",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "description": "SnapSave video URL",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/tiktok": {
-      "get": {
-        "tags": ["downloader"],
-        "summary": "Download TikTok video",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "description": "TikTok video URL",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/pinterestdl": {
-      "get": {
-        "tags": ["downloader"],
-        "summary": "Download Pinterest video",
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "description": "Pinterest video URL",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/pinterest": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Search Pinterest",
-        "parameters": [
-          {
-            "name": "query",
-            "in": "query",
-            "description": "Search query",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/lirik": {
-      "get": {
-        "tags": ["tools"],
-        "summary": "Get song lyrics",
-        "parameters": [
-          {
-            "name": "judul",
-            "in": "query",
-            "description": "Song title",
-            "required": true,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "example": "{\n  \"key\": \"value\"\n}\n"
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-    }
-  }
+"openapi": "3.0.0",
+"info": {
+"title": "Satzz API",
+"description": "API for WhatsApp Bot",
+"version": "1.0.0-oas3",
+"contact": {
+"email": "satganzdevs@gmail.com"
+}
+},
+"paths": {
+"/api/yta": {
+"get": {
+"tags": ["Downloader"],
+"summary": "Download YouTube audio",
+"parameters": [
+{
+"name": "url",
+"in": "query",
+"description": "YouTube video URL",
+"required": true,
+"style": "form",
+"explode": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Successful response",
+"content": {
+"audio/mpeg": {
+"example": "<!-- Example audio content -->\n"
+}
+}
+}
+}
+}
+},
+"/api/ytv": {
+"get": {
+"tags": ["Downloader"],
+"summary": "Download YouTube video",
+"parameters": [
+{
+"name": "url",
+"in": "query",
+"description": "YouTube video URL",
+"required": true,
+"style": "form",
+"explode": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Successful response",
+"content": {
+"video/mp4": {
+"example": "<!-- Example video content -->\n"
+}
+}
+}
+}
+}
+},
+"/api/snapsave": {
+"get": {
+"tags": ["Downloader"],
+"summary": "Download FB/IG video",
+"parameters": [
+{
+"name": "url",
+"in": "query",
+"description": "SnapSave video URL",
+"required": true,
+"style": "form",
+"explode": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Successful response",
+"content": {
+"application/json": {
+"example": "{\n  \"key\": \"value\"\n}\n"
+}
+}
+}
+}
+}
+},
+"/api/tiktok": {
+"get": {
+"tags": ["Downloader"],
+"summary": "Download TikTok video",
+"parameters": [
+{
+"name": "url",
+"in": "query",
+"description": "TikTok video URL",
+"required": true,
+"style": "form",
+"explode": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Successful response",
+"content": {
+"application/json": {
+"example": "{\n  \"key\": \"value\"\n}\n"
+}
+}
+}
+}
+}
+},
+"/api/pinterestdl": {
+"get": {
+"tags": ["Downloader"],
+"summary": "Download Pinterest video",
+"parameters": [
+{
+"name": "url",
+"in": "query",
+"description": "Pinterest video URL",
+"required": true,
+"style": "form",
+"explode": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Successful response",
+"content": {
+"application/json": {
+"example": "{\n  \"key\": \"value\"\n}\n"
+}
+}
+}
+}
+}
+},
+"/api/pinterest": {
+"get": {
+"tags": ["Tools"],
+"summary": "Search Pinterest",
+"parameters": [
+{
+"name": "query",
+"in": "query",
+"description": "Search query",
+"required": true,
+"style": "form",
+"explode": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Successful response",
+"content": {
+"application/json": {
+"example": "{\n  \"key\": \"value\"\n}\n"
+}
+}
+}
+}
+}
+},
+"/api/lirik": {
+"get": {
+"tags": ["Tools"],
+"summary": "Get song lyrics",
+"parameters": [
+{
+"name": "judul",
+"in": "query",
+"description": "Song title",
+"required": true,
+"style": "form",
+"explode": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "Successful response",
+"content": {
+"application/json": {
+"example": "{\n  \"key\": \"value\"\n}\n"
+}
+}
+}
+}
+}
+}
+},
+"components": {
+"schemas": {}
+}
 }
