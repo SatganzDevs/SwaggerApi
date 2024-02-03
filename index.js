@@ -76,7 +76,7 @@ const { judul } = req.query;
 if (!judul) {
 return res.status(400).json({ error: 'Judul musik tidak ditemukan' });
 }
-let ss = await Buscar(judul, 1)
+let ss = await Buscar(judul)
 let bro = {
   title: ss.titulo,
   artist: ss.artista,
