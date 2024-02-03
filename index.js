@@ -26,9 +26,9 @@ return res.data
 const pickRandom = (arr) => { return arr[Math.floor(Math.random() * arr.length)] };
 const app = express();
 const PORT = process.env.PORT || 3000;
-const { snapsave } = require('./snapsave.js');
+const { snapsave } = require('./Satzz/snapsave.js');
 const { TiktokDL } = require("@tobyg74/tiktok-api-dl")
-const { scdl, pinterest, pindl } = require('./scrape.js');
+const { scdl, pinterest, pindl } = require('./Satzz/scrape.js');
 
 
 
