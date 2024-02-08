@@ -10,13 +10,11 @@
   "author": "SatganzDevs",
   "license": "ISC",
   "dependencies": {
-    "@canvas-fonts/arial-bold": "^1.0.4",
-    "canvas": "^2.9.1",
-    "discord.js": "^13.6.0",
-    "gif-encoder-2": "^1.0.5",
-    "gif-frames": "^1.0.1",
-    "image-size": "^1.0.1",
-    "jimp": "^0.16.1",
+    "@cycloneaddons/welcomer": "^1.0.7",
+    "@types/node": "^18.0.6",
+    "aoi.js": "^5.5.5",
+    "discord.js": "^13.13.1",
+    "node-fetch": "^3.2.6"
     "@bochilteam/scraper": "^4.2.4",
     "@tobyg74/tiktok-api-dl": "^1.0.13",
     "axios": "^1.6.2",
