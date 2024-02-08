@@ -52,7 +52,7 @@ const reff = path.join(__dirname, 'SatganzDevs-Sapi-1.0.0-oas3-resolved.json')
 /// STARTS OF API CODE \\\
 app.get('/api/welcome', async (req, res) => {
 const { Wcard } = require("wcard-gen");
-const image = new Wcard()
+const welcomecard = new Wcard()
 .setName(req.name || "Satzz")
 .setAvatar(req.avatar || 'https://gravatar.com/userimage/245140636/a6f456c3200da7bdf2c013cbb0f7e819.jpeg')
 .setTitle("Welcome")
