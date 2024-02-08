@@ -53,11 +53,11 @@ const reff = path.join(__dirname, 'SatganzDevs-Sapi-1.0.0-oas3-resolved.json')
 app.get('/api/welcome', async (req, res) => {
 const { Wcard } = require("wcard-gen");
 const welcomecard = new Wcard()
-.setName(req.name || "Satzz")
-.setAvatar(req.avatar || 'https://gravatar.com/userimage/245140636/a6f456c3200da7bdf2c013cbb0f7e819.jpeg')
+.setName(req.name)
+.setAvatar(req.avatar)
 .setTitle("Welcome")
 .setColor("00e5ff") // hex code without #
-.setBackground(req.backround || `https://cdn.openart.ai/stable_diffusion/96564103ae44eb3ff1f38d84a7c858f561a08d92_2000x2000.webp`)
+.setBackground(req.backround)
 // Building the card
 const card = await welcomecard.build();
 res.setHeader('content-type', 'image/png');
