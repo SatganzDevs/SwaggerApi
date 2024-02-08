@@ -51,18 +51,28 @@ const reff = path.join(__dirname, 'SatganzDevs-Sapi-1.0.0-oas3-resolved.json')
 
 /// STARTS OF API CODE \\\
 app.get('/api/welcome', async (req, res) => {
+try {
 const { Wcard } = require("wcard-gen");
+
+// Membuat objek welcomecard dari kelas Wcard
 const welcomecard = new Wcard()
-.setName(req.name)
-.setAvatar(req.avatar)
+.setName(req.query.name) // Mengambil nama dari query parameter
+.setAvatar(req.query.avatar) // Mengambil avatar dari query parameter
 .setTitle("Welcome")
 .setColor("00e5ff") // hex code without #
-.setBackground(req.backround)
-// Building the card
+.setBackground(req.query.background); // Mengambil background dari query parameter
+
+// Membangun kartu sambutan
 const card = await welcomecard.build();
+
+// Mengirimkan respons dengan kartu sambutan dalam format image/png
 res.setHeader('content-type', 'image/png');
-res.end(card)
-})
+res.end(card);
+} catch (error) {
+console.error(error);
+res.status(500).json({ error: 'Internal server error' });
+}
+});
 app.get('/api/pinterest', async (req, res) => {
 const { query } = req.query;
 if (!query) {
