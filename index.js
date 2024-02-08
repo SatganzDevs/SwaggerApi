@@ -50,6 +50,19 @@ const reff = path.join(__dirname, 'SatganzDevs-Sapi-1.0.0-oas3-resolved.json')
 
 
 /// STARTS OF API CODE \\\
+app.get('/api/welcome', async (req, res) => {
+const Welcomer = require('./Satzz/welcomer');
+const image = new Welcomer()
+.setBackground("https://i.pinimg.com/originals/28/36/ef/2836efe516eb35bcd9b959855e1a1dd9.jpg")
+.setGIF(false)
+.setAvatar(req.avatar)
+.setName(req.username)
+.setDiscriminator(req.discriminator)
+.setBlur(2)
+let img = await image.generate()
+res.setHeader('content-type', 'image/png');
+res.end(img)
+})
 app.get('/api/pinterest', async (req, res) => {
 const { query } = req.query;
 if (!query) {
