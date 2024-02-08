@@ -50,7 +50,7 @@ const reff = path.join(__dirname, 'SatganzDevs-Sapi-1.0.0-oas3-resolved.json')
 
 
 /// STARTS OF API CODE \\\
-app.get('/api/welcome', async (req, res) => {
+app.get('/api/wnb', async (req, res) => {
 try {
 const { Wcard } = require("wcard-gen");
 
@@ -58,8 +58,8 @@ const { Wcard } = require("wcard-gen");
 const welcomecard = new Wcard()
 .setName(req.query.name) // Mengambil nama dari query parameter
 .setAvatar(req.query.avatar) // Mengambil avatar dari query parameter
-.setTitle("Welcome")
-.setColor("00e5ff") // hex code without #
+.setTitle(req.query.title)
+.setColor(req.query.color) // hex code without #
 .setBackground(req.query.background); // Mengambil background dari query parameter
 
 // Membangun kartu sambutan
