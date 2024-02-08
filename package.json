@@ -11,10 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@cycloneaddons/welcomer": "^1.0.7",
-    "@types/node": "^18.0.6",
-    "aoi.js": "^5.5.5",
-    "discord.js": "^13.13.1",
     "node-fetch": "^3.2.6",
+    "canvas": "^2.11.2",
     "@bochilteam/scraper": "^4.2.4",
     "@tobyg74/tiktok-api-dl": "^1.0.13",
     "axios": "^1.6.2",
