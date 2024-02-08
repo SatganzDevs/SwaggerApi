@@ -26,7 +26,7 @@ class Welcomer {
         this.discriminator ??= discriminator
         this.avatar ??= avatar
         this.gif ??= gif
-        this.layer = layer || "./assets/layer.png"
+        this.layer = layer || "/views/layer.png"
         this.blur ??= blur
         this.delay = delay || 50
         this.frame_limit = frame_limit || 30
