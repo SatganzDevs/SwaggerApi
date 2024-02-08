@@ -51,17 +51,17 @@ const reff = path.join(__dirname, 'SatganzDevs-Sapi-1.0.0-oas3-resolved.json')
 
 /// STARTS OF API CODE \\\
 app.get('/api/welcome', async (req, res) => {
-const Welcomer = require('@cycloneaddons/welcomer');
-const image = new Welcomer()
-.setBackground("https://i.pinimg.com/originals/28/36/ef/2836efe516eb35bcd9b959855e1a1dd9.jpg")
-.setGIF(false)
-.setAvatar(req.avatar)
-.setName(req.username)
-.setDiscriminator(req.discriminator)
-.setBlur(2)
-let welcome_img = await image.generate()
+const { Wcard } = require("wcard-gen");
+const image = new Wcard()
+.setName(req.name || "Satzz")
+.setAvatar(req.avatar || 'https://gravatar.com/userimage/245140636/a6f456c3200da7bdf2c013cbb0f7e819.jpeg')
+.setTitle("Welcome")
+.setColor("00e5ff") // hex code without #
+.setBackground(req.backround || `https://cdn.openart.ai/stable_diffusion/96564103ae44eb3ff1f38d84a7c858f561a08d92_2000x2000.webp`)
+// Building the card
+const card = await welcomecard.build();
 res.setHeader('content-type', 'image/png');
-res.end(welcome_img)
+res.end(card)
 })
 app.get('/api/pinterest', async (req, res) => {
 const { query } = req.query;
