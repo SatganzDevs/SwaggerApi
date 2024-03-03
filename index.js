@@ -40,7 +40,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/views', express.static('views'));
 
 
-
+setInterval(() => {
+  await axios.get("https://hn43zx-8080.csb.app/").then((res) => {
+    console.log(res.data);
+  });
+}, 5_000);
 
 app.get('/', (req, res) => {
 res.render('index')
