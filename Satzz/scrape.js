@@ -4,9 +4,6 @@ const fetch = require('node-fetch')
 const request = require('request')
 
 
-const axios = require('axios');
-const cheerio = require('cheerio');
-
 
 
 
