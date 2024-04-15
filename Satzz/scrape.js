@@ -4,6 +4,45 @@ const fetch = require('node-fetch')
 const request = require('request')
 
 
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+
+
+
+
+const getUrl= async(url) => {
+try {
+const res = await axios.get(url);
+const $ = cheerio.load(res.data);
+let hrefs = [];
+$('.overlay-s').each((index, element) => {
+const href = $(element).parent().attr('href');
+hrefs.push(href);
+});
+return hrefs;
+} catch (error) {
+console.error('Error getting token:', error);
+throw error;
+}
+}
+
+
+const getVidWm = async(url) => {
+try {
+const hrefs = await getUrl(url);
+const randomIndex = Math.floor(Math.random() * hrefs.length);
+const randomVid = hrefs[randomIndex];
+const res = await axios.get(randomVid);
+const $ = cheerio.load(res.data);
+const hrefValue = $('video').attr('src');
+console.log('Href:', hrefValue);
+return hrefValue;
+} catch (error) {
+console.error('Error scraping:', error);
+}
+}
+
 
 const pindl = async(url) => {
 try {
@@ -97,6 +136,6 @@ https://instagram.com/kurniawan_satriaaaa
 https://github.com/SatganzDevs
 */
 
-module.exports = { pindl, soundcloud, pinterest }
+module.exports = { getVidWm, pindl, soundcloud, pinterest }
 
 
